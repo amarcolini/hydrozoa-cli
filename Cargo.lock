@@ -430,6 +430,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d231dfb89cfffdbc30e7fc41579ed6066ad03abda9e567ccafae602b97ec5024"
 
 [[package]]
+name = "hydrozoa"
+version = "0.1.0"
+dependencies = [
+ "bon",
+ "byteorder",
+ "camino",
+ "clap",
+ "fs-err",
+ "log",
+ "miette",
+ "serde_ini",
+ "simplelog",
+ "snafu",
+ "tokio",
+ "vex-v5-serial",
+]
+
+[[package]]
 name = "ident_case"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -610,24 +628,6 @@ dependencies = [
  "nix",
  "serialport",
  "winapi",
-]
-
-[[package]]
-name = "multiv"
-version = "0.1.0"
-dependencies = [
- "bon",
- "byteorder",
- "camino",
- "clap",
- "fs-err",
- "log",
- "miette",
- "serde_ini",
- "simplelog",
- "snafu",
- "tokio",
- "vex-v5-serial",
 ]
 
 [[package]]

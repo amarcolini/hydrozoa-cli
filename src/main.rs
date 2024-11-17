@@ -32,16 +32,16 @@ const PROBABLY_WONT_UPLOAD_SIZE: usize = 4 * 1024 * 1024;
 #[derive(Debug, Snafu, Diagnostic)]
 enum CliError {
     #[snafu(transparent)]
-    #[diagnostic(code(multiv::serial))]
+    #[diagnostic(code(hydrozoa::serial))]
     Serial { source: serial::SerialError },
 
     #[snafu(transparent)]
-    #[diagnostic(code(multiv::io))]
+    #[diagnostic(code(hydrozoa::io))]
     Io { source: std::io::Error },
 
     /// No V5 devices found.
     #[diagnostic(
-        code(multiv::disconnected),
+        code(hydrozoa::disconnected),
         help("Ensure that a V5 brain or controller is plugged in and powered on with a stable USB connection, then try again.")
     )]
     NoDevice,
@@ -51,7 +51,7 @@ enum CliError {
 #[diagnostic(severity(Warning))]
 enum CliWarning {
     /// This program is larger than 4 MB, which may cause the upload to fail.
-    #[diagnostic(code(multiv::too_large))]
+    #[diagnostic(code(hydrozoa::too_large))]
     ProgramTooLarge,
 }
 
@@ -230,7 +230,7 @@ impl Program {
                 name: "Name".to_string(),
             },
             project: Project {
-                ide: "MultiV".to_string(),
+                ide: "Hydrozoa".to_string(),
             },
         };
 
