@@ -6,11 +6,13 @@ edition = "2021"
 description = "Manage community-supported programming languages for VEX V5"
 
 [dependencies]
+blake3 = "1.5.4"
 bon = "3.0.0-rc"
 byteorder = "1.5.0"
 camino = "1.1.9"
 clap = { version = "4.5.20", features = ["cargo", "derive"] }
 fs-err = "3.0.0"
+hex = "0.4.3"
 log = "0.4.22"
 miette = { version = "7.2.0", features = ["fancy"] }
 serde_ini = "0.2.0"

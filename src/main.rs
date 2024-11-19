@@ -84,6 +84,11 @@ enum Command {
         #[arg(short, long)]
         slot: u8,
 
+        /// Append a hash to the runtime name when uploading so that existing
+        /// programs that depend on the runtime aren't broken.
+        #[arg(short, long)]
+        hash: bool,
+
         /// The runtime to use
         #[arg(short, long)]
         runtime: Utf8PathBuf,
@@ -118,6 +123,7 @@ async fn run_command(command: Command) -> Result<()> {
             input,
             runtime,
             slot,
+            hash,
         } => {
             let user_program = create_program_payload(&input)?;
             if user_program.len() > PROBABLY_WONT_UPLOAD_SIZE {
@@ -126,10 +132,21 @@ async fn run_command(command: Command) -> Result<()> {
 
             let mut device = open_connection().await?;
 
+            let runtime = fs::read(&runtime)?;
+            let runtime_name = if hash {
+                let mut hasher = blake3::Hasher::new();
+                hasher.update(&runtime);
+                let mut hash = [0; 16];
+                hasher.finalize_xof().read_exact(&mut hash)?;
+                format!("libhydrozoa.{}.bin", hex::encode(hash))
+            } else {
+                "libhydrozoa.bin".to_string()
+            };
+
             let program = Program::builder()
                 .slot(slot)
-                .runtime(fs::read(&runtime)?)
-                .runtime_name("libmutliv_runtime.bin".to_string())
+                .runtime(runtime)
+                .runtime_name(runtime_name)
                 .user_program(user_program)
                 .build();
 
