@@ -7,7 +7,6 @@ description = "Manage community-supported programming languages for VEX V5"
 
 [dependencies]
 blake3 = "1.5.4"
-bon = "3.0.0-rc"
 byteorder = "1.5.0"
 camino = "1.1.9"
 clap = { version = "4.5.20", features = ["cargo", "derive"] }
@@ -19,7 +18,9 @@ serde_ini = "0.2.0"
 simplelog = "0.12.2"
 snafu = "0.8.5"
 tokio = { version = "1.41.1", features = ["rt", "rt-multi-thread", "macros"] }
-vex-v5-serial = { git = "https://github.com/vexide/vex-v5-serial.git", branch = "feat/linked", version = "0.2.2", default-features = false, features = [
-    "connection",
+cargo-v5 = "0.10.3"
+vex-v5-serial = { version = "0.3.3", default-features = false, features = [
     "serial",
+    "connection",
 ] }
+flate2 = "1.0.34"
