@@ -488,7 +488,7 @@ pub async fn upload_program(
         //Future linked runtimes?
         false => {}
         true => {
-            let cold = true; // Future cli option
+            let cold = false; // Future cli option?
             let needs_runtime_upload = cold
                 || (match brain_file_metadata(
                     connection,
@@ -497,7 +497,7 @@ pub async fn upload_program(
                 )
                 .await
                 {
-                    Ok(Some(result)) => result.metadata.version == runtime_version,
+                    Ok(Some(result)) => result.metadata.version != runtime_version,
                     _ => true,
                 });
 
